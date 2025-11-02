@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { db, collection } from "../firebase";
 import { getDocs } from "firebase/firestore";
 import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
+import { useSwipeable } from "react-swipeable";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
@@ -204,6 +204,20 @@ export default function FullWidthTabs() {
     setValue(newValue);
   };
 
+  const handlers = useSwipeable({
+    onSwipedLeft: () => {
+      if (value < 2) {
+        setValue(value + 1);
+      }
+    },
+    onSwipedRight: () => {
+      if (value > 0) {
+        setValue(value - 1);
+      }
+    },
+    trackMouse: true,
+  });
+
   const toggleShowMore = useCallback((type) => {
     if (type === 'projects') {
       setShowAllProjects(prev => !prev);
@@ -327,11 +341,7 @@ export default function FullWidthTabs() {
           </Tabs>
         </AppBar>
 
-        <SwipeableViews
-          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          index={value}
-          onChangeIndex={setValue}
-        >
+        <div {...handlers}>
           <TabPanel value={value} index={0} dir={theme.direction}>
             <div className="container mx-auto flex justify-center items-center overflow-hidden">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
@@ -409,7 +419,7 @@ export default function FullWidthTabs() {
               </div>
             )}
           </TabPanel>
-        </SwipeableViews>
+        </div>
       </Box>
     </div>
   );
