@@ -19,10 +19,10 @@ const StatusBadge = memo(() => (
     data-aos-delay="400"
   >
     <div className="relative group">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-full blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
-      <div className="relative px-3 sm:px-4 py-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/10">
-        <span className="bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-transparent bg-clip-text sm:text-sm text-[0.7rem] font-medium flex items-center">
-          <Sparkles className="sm:w-4 sm:h-4 w-3 h-3 mr-2 text-blue-400" />
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] rounded-full blur opacity-30 group-hover:opacity-60 transition duration-1000"></div>
+      <div className="relative px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-black/50 to-black/40 backdrop-blur-xl border border-white/10 group-hover:border-[#6366f1]/30 transition-all duration-300">
+        <span className="bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] text-transparent bg-clip-text sm:text-sm text-[0.7rem] font-semibold flex items-center">
+          <Sparkles className="sm:w-4 sm:h-4 w-3 h-3 mr-2 text-[#6366f1] animate-pulse" />
           3+ Years Experience
         </span>
       </div>
@@ -33,16 +33,16 @@ const StatusBadge = memo(() => (
 const MainTitle = memo(() => (
   <div className="space-y-2" data-aos="fade-up" data-aos-delay="600">
     <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl font-bold tracking-tight">
-      <span className="relative inline-block">
-        <span className="absolute -inset-2 bg-gradient-to-r from-[#6366f1] to-[#a855f7] blur-2xl opacity-20"></span>
-        <span className="relative bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
+      <span className="relative inline-block group">
+        <span className="absolute -inset-2 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></span>
+        <span className="relative bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent drop-shadow-lg">
           Full Stack
         </span>
       </span>
       <br />
-      <span className="relative inline-block mt-2">
-        <span className="absolute -inset-2 bg-gradient-to-r from-[#6366f1] to-[#a855f7] blur-2xl opacity-20"></span>
-        <span className="relative bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent">
+      <span className="relative inline-block mt-2 group">
+        <span className="absolute -inset-2 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></span>
+        <span className="relative bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] bg-clip-text text-transparent drop-shadow-lg">
           Developer
         </span>
       </span>
@@ -50,11 +50,75 @@ const MainTitle = memo(() => (
   </div>
 ));
 
-const TechStack = memo(({ tech }) => (
-  <div className="px-4 py-2 hidden sm:block rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-sm text-gray-300 hover:bg-white/10 transition-colors">
-    {tech}
-  </div>
-));
+const TechStack = memo(({ tech, index }) => {
+  const colorSchemes = [
+    { 
+      bgFrom: "#6366f1", bgTo: "#8b5cf6", 
+      border: "#6366f1", 
+      textFrom: "#6366f1", textTo: "#8b5cf6"
+    },
+    { 
+      bgFrom: "#8b5cf6", bgTo: "#a855f7", 
+      border: "#8b5cf6", 
+      textFrom: "#8b5cf6", textTo: "#a855f7"
+    },
+    { 
+      bgFrom: "#a855f7", bgTo: "#ec4899", 
+      border: "#a855f7", 
+      textFrom: "#a855f7", textTo: "#ec4899"
+    },
+    { 
+      bgFrom: "#ec4899", bgTo: "#f43f5e", 
+      border: "#ec4899", 
+      textFrom: "#ec4899", textTo: "#f43f5e"
+    },
+    { 
+      bgFrom: "#6366f1", bgTo: "#a855f7", 
+      border: "#6366f1", 
+      textFrom: "#6366f1", textTo: "#a855f7"
+    },
+    { 
+      bgFrom: "#8b5cf6", bgTo: "#ec4899", 
+      border: "#8b5cf6", 
+      textFrom: "#8b5cf6", textTo: "#ec4899"
+    },
+    { 
+      bgFrom: "#a855f7", bgTo: "#f97316", 
+      border: "#a855f7", 
+      textFrom: "#a855f7", textTo: "#f97316"
+    },
+  ];
+  
+  const scheme = colorSchemes[index % colorSchemes.length];
+  
+  return (
+    <div 
+      className="px-4 py-2 hidden sm:block rounded-xl backdrop-blur-sm border text-sm text-gray-300 hover:scale-105 hover:shadow-lg transition-all duration-300 group cursor-pointer relative overflow-hidden"
+      style={{
+        background: `linear-gradient(to right, ${scheme.bgFrom}33, ${scheme.bgTo}33)`,
+        borderColor: `${scheme.border}66`,
+        boxShadow: `0 4px 14px 0 ${scheme.border}33`
+      }}
+    >
+      <div 
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: `linear-gradient(to right, ${scheme.bgFrom}33, ${scheme.bgTo}33)`
+        }}
+      ></div>
+      <span 
+        className="relative font-medium text-gray-300 group-hover:text-transparent transition-all duration-300"
+        style={{
+          backgroundImage: `linear-gradient(to right, ${scheme.textFrom}, ${scheme.textTo})`,
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+        }}
+      >
+        {tech}
+      </span>
+    </div>
+  );
+});
 
 const CTAButton = memo(({ href, text, icon: Icon }) => (
   <a href={href}>
@@ -195,12 +259,27 @@ const Home = () => {
 
                 {/* Typing Effect */}
                 <div
-                  className="h-8 flex items-center"
+                  className="h-8 flex items-center relative group"
                   data-aos="fade-up"
                   data-aos-delay="800"
                 >
-                  <span className="text-xl md:text-2xl bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent font-light">
-                    {text}
+                  <span className="relative text-xl md:text-2xl font-medium">
+                    {text.includes("MERN") ? (
+                      <span className="bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] bg-clip-text text-transparent">
+                        {text}
+                      </span>
+                    ) : text.includes("AWS") ? (
+                      <span className="inline-block">
+                        <span className="bg-gradient-to-r from-[#f97316] via-[#fb923c] to-[#fdba74] bg-clip-text text-transparent font-semibold">AWS</span>
+                        <span className="text-gray-300"> & </span>
+                        <span className="bg-gradient-to-r from-[#8b5cf6] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent font-semibold">Web3</span>
+                        {text.includes("Enthusiast") && <span className="text-gray-300"> Enthusiast</span>}
+                      </span>
+                    ) : (
+                      <span className="bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent">
+                        {text}
+                      </span>
+                    )}
                   </span>
                   <span className="w-[3px] h-6 bg-gradient-to-t from-[#6366f1] to-[#a855f7] ml-1 animate-blink"></span>
                 </div>
@@ -211,17 +290,19 @@ const Home = () => {
                   data-aos="fade-up"
                   data-aos-delay="1000"
                 >
-                  Full Stack Developer with expertise in building scalable web applications across the MERN stack, AWS infrastructure, and modern development practices. I design and implement solutions spanning frontend architecture to backend services.
+                  Full Stack Developer with expertise in building scalable web applications across the{" "}
+                  <span className="text-[#6366f1] font-medium">MERN stack</span>,{" "}
+                  <span className="text-[#f97316] font-medium">AWS</span>, and modern development practices. I design and implement solutions spanning frontend architecture to backend services.
                 </p>
 
                 {/* Tech Stack */}
                 <div
-                  className="flex flex-wrap gap-3 justify-start"
+                  className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"
                   data-aos="fade-up"
                   data-aos-delay="1200"
                 >
                   {TECH_STACK.map((tech, index) => (
-                    <TechStack key={index} tech={tech} />
+                    <TechStack key={index} tech={tech} index={index} />
                   ))}
                 </div>
 

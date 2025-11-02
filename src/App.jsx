@@ -31,13 +31,18 @@ const LandingPage = ({ showWelcome, setShowWelcome }) => {
           <footer>
             <center>
               <hr className="my-3 border-gray-400 opacity-15 sm:mx-auto lg:my-6 text-center" />
-              <span className="block text-sm pb-4 text-gray-500 text-center dark:text-gray-400">
-                © 2025{" "}
-                <a href="https://flowbite.com/" className="hover:underline">
-                  ABC™
-                </a>
-                . All Rights Reserved.
-              </span>
+              <div className="flex flex-col items-center gap-2 pb-4">
+                <span className="text-sm text-gray-500 text-center dark:text-gray-400">
+                  Made with <span className="text-red-500">❤️</span> by{" "}
+                  <a href="#Home" className="text-[#6366f1] hover:text-[#a855f7] hover:underline transition-colors font-medium">
+                    Monu Prajapat
+                  </a>
+                  {" "}© {new Date().getFullYear()}
+                </span>
+                <span className="text-xs text-gray-500/70 text-center">
+                  Full Stack Developer | MERN • DevOps • Web3
+                </span>
+              </div>
             </center>
           </footer>
         </>
@@ -52,13 +57,18 @@ const ProjectPageLayout = () => (
     <footer>
       <center>
         <hr className="my-3 border-gray-400 opacity-15 sm:mx-auto lg:my-6 text-center" />
-        <span className="block text-sm pb-4 text-gray-500 text-center dark:text-gray-400">
-          © 2023{" "}
-          <a href="https://flowbite.com/" className="hover:underline">
-            EkiZR™
-          </a>
-          . All Rights Reserved.
-        </span>
+        <div className="flex flex-col items-center gap-2 pb-4">
+          <span className="text-sm text-gray-500 text-center dark:text-gray-400">
+            Made with <span className="text-red-500">❤️</span> by{" "}
+            <a href="/" className="text-[#6366f1] hover:text-[#a855f7] hover:underline transition-colors font-medium">
+              Monu Prajapat
+            </a>
+            {" "}© {new Date().getFullYear()}
+          </span>
+          <span className="text-xs text-gray-500/70 text-center">
+            Full Stack Developer | MERN • DevOps • Web3
+          </span>
+        </div>
       </center>
     </footer>
   </>
