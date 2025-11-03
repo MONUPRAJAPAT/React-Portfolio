@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("Home");
+    const { theme, toggleTheme } = useTheme();
     
     const navItems = [
         { href: "#Home", label: "Home" },
@@ -69,9 +71,9 @@ const Navbar = () => {
         <nav
         className={`fixed w-full top-0 z-50 transition-all duration-500 ${
             isOpen
-                ? "bg-[#030014] opacity-100"
+                ? theme === 'dark' ? "bg-[#030014] opacity-100" : "bg-white opacity-100"
                 : scrolled
-                ? "bg-[#030014]/50 backdrop-blur-xl"
+                ? theme === 'dark' ? "bg-[#030014]/50 backdrop-blur-xl" : "bg-white/80 backdrop-blur-xl"
                 : "bg-transparent"
         }`}
     >
@@ -102,7 +104,9 @@ const Navbar = () => {
                                     className={`relative z-10 transition-colors duration-300 ${
                                         activeSection === item.href.substring(1)
                                             ? "bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent font-semibold"
-                                            : "text-[#e2d3fd] group-hover:text-white"
+                                            : theme === 'dark' 
+                                                ? "text-[#e2d3fd] group-hover:text-white"
+                                                : "text-gray-700 group-hover:text-gray-900"
                                     }`}
                                 >
                                     {item.label}
@@ -116,16 +120,49 @@ const Navbar = () => {
                                 />
                             </a>
                         ))}
+                        {/* Theme Toggle Button */}
+                        <button
+                            onClick={toggleTheme}
+                            className={`p-2 rounded-lg transition-all duration-300 ${
+                                theme === 'dark'
+                                    ? "text-[#e2d3fd] hover:text-white hover:bg-white/10"
+                                    : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                            }`}
+                            aria-label="Toggle theme"
+                        >
+                            {theme === 'dark' ? (
+                                <Sun className="w-5 h-5" />
+                            ) : (
+                                <Moon className="w-5 h-5" />
+                            )}
+                        </button>
                     </div>
                 </div>
     
-                {/* Mobile Menu Button */}
-                <div className="md:hidden">
+                {/* Mobile Menu Button and Theme Toggle */}
+                <div className="md:hidden flex items-center gap-2">
+                    <button
+                        onClick={toggleTheme}
+                        className={`p-2 rounded-lg transition-all duration-300 ${
+                            theme === 'dark'
+                                ? "text-[#e2d3fd] hover:text-white hover:bg-white/10"
+                                : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                        }`}
+                        aria-label="Toggle theme"
+                    >
+                        {theme === 'dark' ? (
+                            <Sun className="w-5 h-5" />
+                        ) : (
+                            <Moon className="w-5 h-5" />
+                        )}
+                    </button>
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className={`relative p-2 text-[#e2d3fd] hover:text-white transition-transform duration-300 ease-in-out transform ${
-                            isOpen ? "rotate-90 scale-125" : "rotate-0 scale-100"
-                        }`}
+                        className={`relative p-2 transition-transform duration-300 ease-in-out transform ${
+                            theme === 'dark'
+                                ? "text-[#e2d3fd] hover:text-white"
+                                : "text-gray-700 hover:text-gray-900"
+                        } ${isOpen ? "rotate-90 scale-125" : "rotate-0 scale-100"}`}
                     >
                         {isOpen ? (
                             <X className="w-6 h-6" />
@@ -139,7 +176,9 @@ const Navbar = () => {
     
         {/* Mobile Menu Overlay */}
         <div
-            className={`md:hidden h-2/5 fixed inset-0 bg-[#030014] transition-all duration-300 ease-in-out ${
+            className={`md:hidden h-2/5 fixed inset-0 transition-all duration-300 ease-in-out ${
+                theme === 'dark' ? "bg-[#030014]" : "bg-white"
+            } ${
                 isOpen
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-[-100%] pointer-events-none"
@@ -156,7 +195,9 @@ const Navbar = () => {
                             className={`block px-4 py-3 text-lg font-medium transition-all duration-300 ease ${
                                 activeSection === item.href.substring(1)
                                     ? "bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent font-semibold"
-                                    : "text-[#e2d3fd] hover:text-white"
+                                    : theme === 'dark'
+                                        ? "text-[#e2d3fd] hover:text-white"
+                                        : "text-gray-700 hover:text-gray-900"
                             }`}
                             style={{
                                 transitionDelay: `${index * 100}ms`,

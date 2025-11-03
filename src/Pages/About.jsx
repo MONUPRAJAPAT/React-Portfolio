@@ -10,30 +10,36 @@ import {
 } from "lucide-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useTheme } from "../context/ThemeContext";
 
 // Memoized Components
-const Header = memo(() => (
-  <div className="text-center lg:mb-8 mb-2 px-[5%]">
-    <div className="inline-block relative group">
-      <h2
-        className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7]"
+const Header = memo(() => {
+  const { theme } = useTheme();
+  return (
+    <div className="text-center lg:mb-8 mb-2 px-[5%]">
+      <div className="inline-block relative group">
+        <h2
+          className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7]"
+          data-aos="zoom-in-up"
+          data-aos-duration="600"
+        >
+          About Me
+        </h2>
+      </div>
+      <p
+        className={`mt-2 max-w-2xl mx-auto text-base sm:text-lg flex items-center justify-center gap-2 ${
+          theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+        }`}
         data-aos="zoom-in-up"
-        data-aos-duration="600"
+        data-aos-duration="800"
       >
-        About Me
-      </h2>
-    </div>
-    <p
-      className="mt-2 text-gray-400 max-w-2xl mx-auto text-base sm:text-lg flex items-center justify-center gap-2"
-      data-aos="zoom-in-up"
-      data-aos-duration="800"
-    >
       <Sparkles className="w-5 h-5 text-purple-400" />
       Full Stack Developer | MERN • DevOps • Web3
       <Sparkles className="w-5 h-5 text-purple-400" />
     </p>
   </div>
-));
+  );
+});
 
 const ProfileImage = memo(() => (
   <div className="flex justify-end items-center sm:p-12 sm:py-0 sm:pb-0 p-0 py-2 pb-2">
@@ -72,23 +78,33 @@ const ProfileImage = memo(() => (
 ));
 
 const StatCard = memo(
-  ({ icon: Icon, color, value, label, description, animation }) => (
+  ({ icon: Icon, color, value, label, description, animation, theme }) => (
     <div
       data-aos={animation}
       data-aos-duration={1300}
       className="relative group"
     >
-      <div className="relative z-10 bg-gray-900/50 backdrop-blur-lg rounded-2xl p-6 border border-white/10 overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl h-full flex flex-col justify-between">
+      <div className={`relative z-10 backdrop-blur-lg rounded-2xl p-6 border overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl h-full flex flex-col justify-between ${
+        theme === 'dark' 
+          ? 'bg-gray-900/50 border-white/10' 
+          : 'bg-white/80 border-gray-200'
+      }`}>
         <div
           className={`absolute -z-10 inset-0 bg-gradient-to-br ${color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}
         ></div>
 
         <div className="flex items-center justify-between mb-4">
-          <div className="w-16 h-16 rounded-full flex items-center justify-center bg-white/10 transition-transform group-hover:rotate-6">
-            <Icon className="w-8 h-8 text-white" />
+          <div className={`w-16 h-16 rounded-full flex items-center justify-center transition-transform group-hover:rotate-6 ${
+            theme === 'dark' ? 'bg-white/10' : 'bg-gray-100'
+          }`}>
+            <Icon className={`w-8 h-8 ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`} />
           </div>
           <span
-            className="text-4xl font-bold text-white"
+            className={`text-4xl font-bold ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}
             data-aos="fade-up-left"
             data-aos-duration="1500"
             data-aos-anchor-placement="top-bottom"
@@ -99,7 +115,9 @@ const StatCard = memo(
 
         <div>
           <p
-            className="text-sm uppercase tracking-wider text-gray-300 mb-2"
+            className={`text-sm uppercase tracking-wider mb-2 ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+            }`}
             data-aos="fade-up"
             data-aos-duration="800"
             data-aos-anchor-placement="top-bottom"
@@ -108,14 +126,20 @@ const StatCard = memo(
           </p>
           <div className="flex items-center justify-between">
             <p
-              className="text-xs text-gray-400"
+              className={`text-xs ${
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+              }`}
               data-aos="fade-up"
               data-aos-duration="1000"
               data-aos-anchor-placement="top-bottom"
             >
               {description}
             </p>
-            <ArrowUpRight className="w-4 h-4 text-white/50 group-hover:text-white transition-colors" />
+            <ArrowUpRight className={`w-4 h-4 transition-colors ${
+              theme === 'dark' 
+                ? 'text-white/50 group-hover:text-white' 
+                : 'text-gray-400 group-hover:text-gray-900'
+            }`} />
           </div>
         </div>
       </div>
@@ -124,6 +148,7 @@ const StatCard = memo(
 );
 
 const AboutPage = () => {
+  const { theme } = useTheme();
   // Memoized calculations
   const { totalProjects, totalCertificates, YearExperience } = useMemo(() => {
     const storedProjects = JSON.parse(localStorage.getItem("projects") || "[]");
@@ -205,7 +230,9 @@ const AboutPage = () => {
 
   return (
     <div
-      className="h-auto pb-[10%] text-white overflow-hidden px-[5%] sm:px-[5%] lg:px-[10%] mt-10 sm-mt-0"
+      className={`h-auto pb-[10%] overflow-hidden px-[5%] sm:px-[5%] lg:px-[10%] mt-10 sm-mt-0 ${
+        theme === 'dark' ? 'text-white' : 'text-gray-900'
+      }`}
       id="About"
     >
       <Header />
@@ -222,7 +249,9 @@ const AboutPage = () => {
                 Hello, I'm
               </span>
               <span
-                className="block mt-2 text-gray-200"
+                className={`block mt-2 ${
+                  theme === 'dark' ? 'text-gray-200' : 'text-gray-800'
+                }`}
                 data-aos="fade-right"
                 data-aos-duration="1300"
               >
@@ -231,7 +260,9 @@ const AboutPage = () => {
             </h2>
 
             <p
-              className="text-base sm:text-lg lg:text-xl text-gray-400 leading-relaxed text-justify pb-4 sm:pb-0"
+              className={`text-base sm:text-lg lg:text-xl leading-relaxed text-justify pb-4 sm:pb-0 ${
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+              }`}
               data-aos="fade-right"
               data-aos-duration="1500"
             >
@@ -271,7 +302,7 @@ const AboutPage = () => {
         <a href="#Portofolio">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 cursor-pointer">
             {statsData.map((stat) => (
-              <StatCard key={stat.label} {...stat} />
+              <StatCard key={stat.label} {...stat} theme={theme} />
             ))}
           </div>
         </a>

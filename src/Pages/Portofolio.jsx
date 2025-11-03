@@ -3,7 +3,7 @@ import { db, collection } from "../firebase";
 import { getDocs } from "firebase/firestore";
 import PropTypes from "prop-types";
 import { useSwipeable } from "react-swipeable";
-import { useTheme } from "@mui/material/styles";
+import { useTheme as useMuiTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -15,15 +15,14 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Certificate from "../components/Certificate";
 import { Code, Award, Boxes } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 // Separate ShowMore/ShowLess button component
-const ToggleButton = ({ onClick, isShowingMore }) => (
+const ToggleButton = ({ onClick, isShowingMore, theme }) => (
   <button
     onClick={onClick}
-    className="
+                className={`
       px-3 py-1.5
-      text-slate-300 
-      hover:text-white 
       text-sm 
       font-medium 
       transition-all 
@@ -32,17 +31,17 @@ const ToggleButton = ({ onClick, isShowingMore }) => (
       flex 
       items-center 
       gap-2
-      bg-white/5 
-      hover:bg-white/10
       rounded-md
       border 
-      border-white/10
-      hover:border-white/20
       backdrop-blur-sm
       group
       relative
       overflow-hidden
-    "
+      ${theme === 'dark' 
+        ? 'text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 border-white/10 hover:border-white/20'
+        : 'text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 border-gray-200 hover:border-gray-300'
+      }
+    `}
   >
     <span className="relative z-10 flex items-center gap-2">
       {isShowingMore ? "See Less" : "See More"}
@@ -140,7 +139,8 @@ const localCertificates = [
 ];
 
 export default function FullWidthTabs() {
-  const theme = useTheme();
+  const muiTheme = useMuiTheme();
+  const { theme } = useTheme();
   const [value, setValue] = useState(0);
   const [projects, setProjects] = useState([]);
   const [certificates, setCertificates] = useState([]);
@@ -231,9 +231,11 @@ export default function FullWidthTabs() {
   const displayedProjects = showAllProjects ? projects : projects.slice(0, initialItems);
   const displayedCertificates = showAllCertificates ? certificates : certificates.slice(0, initialItems);
   const displayedTechStacks = showAllTechStacks ? techStacks : techStacks.slice(0, initialTechStacks);
-
+  
   return (
-    <div className="md:px-[10%] px-[5%] w-full sm:mt-0 mt-[3rem] bg-[#030014] overflow-hidden" id="Portofolio">
+    <div className={`md:px-[10%] px-[5%] w-full sm:mt-0 mt-[3rem] overflow-hidden ${
+      theme === 'dark' ? 'bg-[#030014]' : 'bg-white'
+    }`} id="Portofolio">
       {/* Header section - unchanged */}
       <div className="text-center pb-10" data-aos="fade-up" data-aos-duration="1000">
         <h2 className="inline-block text-3xl md:text-5xl font-bold text-center mx-auto text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7]">
@@ -247,7 +249,9 @@ export default function FullWidthTabs() {
             Portfolio Showcase
           </span>
         </h2>
-        <p className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base mt-2">
+        <p className={`max-w-2xl mx-auto text-sm md:text-base mt-2 ${
+          theme === 'dark' ? 'text-slate-400' : 'text-gray-600'
+        }`}>
           Explore my journey through projects, certifications, and technical expertise. 
           Each section represents a milestone in my continuous learning path.
         </p>
@@ -342,7 +346,7 @@ export default function FullWidthTabs() {
         </AppBar>
 
         <div {...handlers}>
-          <TabPanel value={value} index={0} dir={theme.direction}>
+          <TabPanel value={value} index={0} dir={muiTheme.direction}>
             <div className="container mx-auto flex justify-center items-center overflow-hidden">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
                 {displayedProjects.map((project, index) => (
@@ -367,12 +371,13 @@ export default function FullWidthTabs() {
                 <ToggleButton
                   onClick={() => toggleShowMore('projects')}
                   isShowingMore={showAllProjects}
+                  theme={theme}
                 />
               </div>
             )}
           </TabPanel>
 
-          <TabPanel value={value} index={1} dir={theme.direction}>
+          <TabPanel value={value} index={1} dir={muiTheme.direction}>
             <div className="container mx-auto flex justify-center items-center overflow-hidden">
               <div className="grid grid-cols-1 md:grid-cols-3 md:gap-5 gap-4">
                 {displayedCertificates.map((certificate, index) => (
@@ -391,12 +396,13 @@ export default function FullWidthTabs() {
                 <ToggleButton
                   onClick={() => toggleShowMore('certificates')}
                   isShowingMore={showAllCertificates}
+                  theme={theme}
                 />
               </div>
             )}
           </TabPanel>
 
-          <TabPanel value={value} index={2} dir={theme.direction}>
+          <TabPanel value={value} index={2} dir={muiTheme.direction}>
             <div className="container mx-auto flex justify-center items-center overflow-hidden pb-[5%]">
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 lg:gap-8 gap-5">
                 {displayedTechStacks.map((stack, index) => (
@@ -415,6 +421,7 @@ export default function FullWidthTabs() {
                 <ToggleButton
                   onClick={() => toggleShowMore('techstacks')}
                   isShowingMore={showAllTechStacks}
+                  theme={theme}
                 />
               </div>
             )}

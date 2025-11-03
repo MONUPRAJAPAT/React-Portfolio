@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react"
+import { useTheme } from "../context/ThemeContext"
 
 const AnimatedBackground = () => {
+	const { theme } = useTheme()
 	const blobRefs = useRef([])
 	const initialPositions = [
 		{ x: -4, y: 0 },
@@ -59,7 +61,11 @@ const AnimatedBackground = () => {
 					ref={(ref) => (blobRefs.current[3] = ref)}
 					className="absolute -bottom-10 right-20 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 md:opacity-10 hidden sm:block"></div>
 			</div>
-			<div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f10_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f10_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+			<div className={`absolute inset-0 ${
+				theme === 'dark' 
+					? 'bg-[linear-gradient(to_right,#4f4f4f10_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f10_1px,transparent_1px)]'
+					: 'bg-[linear-gradient(to_right,#e5e7eb20_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb20_1px,transparent_1px)]'
+			} bg-[size:24px_24px]`}></div>
 		</div>
 	)
 }

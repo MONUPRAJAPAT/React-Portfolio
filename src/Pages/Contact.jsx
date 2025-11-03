@@ -4,8 +4,10 @@ import SocialLinks from "../components/SocialLinks";
 import Swal from "sweetalert2";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useTheme } from "../context/ThemeContext";
 
 const ContactPage = () => {
+  const { theme } = useTheme();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -125,7 +127,9 @@ const ContactPage = () => {
         <p
           data-aos="fade-up"
           data-aos-duration="1100"
-          className="text-slate-400 max-w-2xl mx-auto text-sm md:text-base mt-2"
+          className={`max-w-2xl mx-auto text-sm md:text-base mt-2 ${
+            theme === 'dark' ? 'text-slate-400' : 'text-gray-600'
+          }`}
         >
           Got a question? Send me a message, and I'll get back to you soon.
         </p>
@@ -143,21 +147,37 @@ const ContactPage = () => {
               href="mailto:monuprajapat6270@gmail.com"
               data-aos="fade-up"
               data-aos-delay="100"
-              className="block bg-gradient-to-br from-white/5 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-[#6366f1]/60 hover:shadow-2xl hover:shadow-[#6366f1]/30 transition-all duration-500 group cursor-pointer transform hover:scale-[1.03] hover:-translate-y-1"
+              className={`block backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 group cursor-pointer transform hover:scale-[1.03] hover:-translate-y-1 ${
+                theme === 'dark'
+                  ? 'bg-gradient-to-br from-white/5 to-white/5 border-white/10 hover:border-[#6366f1]/60 hover:shadow-2xl hover:shadow-[#6366f1]/30'
+                  : 'bg-white border-gray-200 hover:border-[#6366f1]/50 hover:shadow-lg hover:shadow-[#6366f1]/15 shadow-sm'
+              }`}
             >
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-4 rounded-2xl bg-gradient-to-br from-[#6366f1]/25 to-[#a855f7]/25 group-hover:from-[#6366f1]/40 group-hover:to-[#a855f7]/40 transition-all shadow-lg group-hover:shadow-[#6366f1]/30">
+                  <div className={`p-4 rounded-2xl transition-all shadow-lg group-hover:shadow-[#6366f1]/30 ${
+                    theme === 'light' 
+                      ? 'bg-gradient-to-br from-[#6366f1]/10 to-[#a855f7]/10 shadow-[#6366f1]/5 group-hover:from-[#6366f1]/15 group-hover:to-[#a855f7]/15' 
+                      : 'bg-gradient-to-br from-[#6366f1]/25 to-[#a855f7]/25 group-hover:from-[#6366f1]/40 group-hover:to-[#a855f7]/40'
+                  }`}>
                     <Mail className="w-7 h-7 text-[#6366f1] group-hover:scale-110 transition-transform" />
                   </div>
                   <div>
-                    <h3 className="text-white font-bold text-lg mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all">Email Address</h3>
-                    <p className="text-xs text-gray-400 font-medium">Let's connect via email</p>
+                    <h3 className={`font-bold text-lg mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>Email Address</h3>
+                    <p className={`text-xs font-medium ${
+                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                    }`}>Let's connect via email</p>
                   </div>
                 </div>
               </div>
-              <div className="pt-4 border-t border-white/10">
-                <p className="text-white font-semibold text-base group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all break-all">
+              <div className={`pt-4 border-t ${
+                theme === 'dark' ? 'border-white/10' : 'border-gray-200'
+              }`}>
+                <p className={`font-semibold text-base group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all break-all ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-800'
+                }`}>
                   monuprajapat6270@gmail.com
                 </p>
               </div>
@@ -168,21 +188,37 @@ const ContactPage = () => {
               href="tel:+919996105221"
               data-aos="fade-up"
               data-aos-delay="200"
-              className="block bg-gradient-to-br from-white/5 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-[#6366f1]/60 hover:shadow-2xl hover:shadow-[#6366f1]/30 transition-all duration-500 group cursor-pointer transform hover:scale-[1.03] hover:-translate-y-1"
+              className={`block backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 group cursor-pointer transform hover:scale-[1.03] hover:-translate-y-1 ${
+                theme === 'dark'
+                  ? 'bg-gradient-to-br from-white/5 to-white/5 border-white/10 hover:border-[#6366f1]/60 hover:shadow-2xl hover:shadow-[#6366f1]/30'
+                  : 'bg-white border-gray-200 hover:border-[#6366f1]/50 hover:shadow-lg hover:shadow-[#6366f1]/15 shadow-sm'
+              }`}
             >
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-4 rounded-2xl bg-gradient-to-br from-[#6366f1]/25 to-[#a855f7]/25 group-hover:from-[#6366f1]/40 group-hover:to-[#a855f7]/40 transition-all shadow-lg group-hover:shadow-[#6366f1]/30">
+                  <div className={`p-4 rounded-2xl transition-all shadow-lg group-hover:shadow-[#6366f1]/30 ${
+                    theme === 'light' 
+                      ? 'bg-gradient-to-br from-[#6366f1]/10 to-[#a855f7]/10 shadow-[#6366f1]/5 group-hover:from-[#6366f1]/15 group-hover:to-[#a855f7]/15' 
+                      : 'bg-gradient-to-br from-[#6366f1]/25 to-[#a855f7]/25 group-hover:from-[#6366f1]/40 group-hover:to-[#a855f7]/40'
+                  }`}>
                     <Phone className="w-7 h-7 text-[#6366f1] group-hover:scale-110 transition-transform" />
                   </div>
                   <div>
-                    <h3 className="text-white font-bold text-lg mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all">Phone Number</h3>
-                    <p className="text-xs text-gray-400 font-medium">Available for calls</p>
+                    <h3 className={`font-bold text-lg mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>Phone Number</h3>
+                    <p className={`text-xs font-medium ${
+                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                    }`}>Available for calls</p>
                   </div>
                 </div>
               </div>
-              <div className="pt-4 border-t border-white/10">
-                <p className="text-white font-semibold text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all tracking-wide">
+              <div className={`pt-4 border-t ${
+                theme === 'dark' ? 'border-white/10' : 'border-gray-200'
+              }`}>
+                <p className={`font-semibold text-lg group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all tracking-wide ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-800'
+                }`}>
                   +91 9996105221
                 </p>
               </div>
@@ -195,24 +231,42 @@ const ContactPage = () => {
               rel="noopener noreferrer"
               data-aos="fade-up"
               data-aos-delay="300"
-              className="block bg-gradient-to-br from-white/5 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/10 hover:border-[#6366f1]/60 hover:shadow-2xl hover:shadow-[#6366f1]/30 transition-all duration-500 group cursor-pointer transform hover:scale-[1.03] hover:-translate-y-1"
+              className={`block backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 group cursor-pointer transform hover:scale-[1.03] hover:-translate-y-1 ${
+                theme === 'dark'
+                  ? 'bg-gradient-to-br from-white/5 to-white/5 border-white/10 hover:border-[#6366f1]/60 hover:shadow-2xl hover:shadow-[#6366f1]/30'
+                  : 'bg-white border-gray-200 hover:border-[#6366f1]/50 hover:shadow-lg hover:shadow-[#6366f1]/15 shadow-sm'
+              }`}
             >
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-4 rounded-2xl bg-gradient-to-br from-[#6366f1]/25 to-[#a855f7]/25 group-hover:from-[#6366f1]/40 group-hover:to-[#a855f7]/40 transition-all shadow-lg group-hover:shadow-[#6366f1]/30">
+                  <div className={`p-4 rounded-2xl transition-all shadow-lg group-hover:shadow-[#6366f1]/30 ${
+                    theme === 'light' 
+                      ? 'bg-gradient-to-br from-[#6366f1]/10 to-[#a855f7]/10 shadow-[#6366f1]/5 group-hover:from-[#6366f1]/15 group-hover:to-[#a855f7]/15' 
+                      : 'bg-gradient-to-br from-[#6366f1]/25 to-[#a855f7]/25 group-hover:from-[#6366f1]/40 group-hover:to-[#a855f7]/40'
+                  }`}>
                     <MapPin className="w-7 h-7 text-[#6366f1] group-hover:scale-110 transition-transform" />
                   </div>
                   <div>
-                    <h3 className="text-white font-bold text-lg mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all">Location</h3>
-                    <p className="text-xs text-gray-400 font-medium">Based in India</p>
+                    <h3 className={`font-bold text-lg mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>Location</h3>
+                    <p className={`text-xs font-medium ${
+                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                    }`}>Based in India</p>
                   </div>
                 </div>
               </div>
-              <div className="pt-4 border-t border-white/10">
-                <p className="text-white font-semibold text-base mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all">
+              <div className={`pt-4 border-t ${
+                theme === 'dark' ? 'border-white/10' : 'border-gray-200'
+              }`}>
+                <p className={`font-semibold text-base mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-800'
+                }`}>
                   Karnal, Haryana
                 </p>
-                <p className="text-xs text-gray-400 font-medium flex items-center gap-1">
+                <p className={`text-xs font-medium flex items-center gap-1 ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                }`}>
                   <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
                   Available Worldwide (Remote)
                 </p>
@@ -226,34 +280,58 @@ const ContactPage = () => {
             <div
               data-aos="fade-up"
               data-aos-delay="400"
-              className="bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10 backdrop-blur-xl rounded-3xl p-8 border border-green-400/30 hover:border-green-400/50 hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-500 group transform hover:scale-[1.02] hover:-translate-y-1"
+              className={`backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 group transform hover:scale-[1.02] hover:-translate-y-1 ${
+                theme === 'dark'
+                  ? 'bg-gradient-to-br from-green-500/10 via-emerald-500/10 to-teal-500/10 border-green-400/30 hover:border-green-400/50 hover:shadow-2xl hover:shadow-green-500/20'
+                  : 'bg-white border-green-200 hover:border-green-400/50 hover:shadow-lg hover:shadow-green-500/10 shadow-sm'
+              }`}
             >
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-4 rounded-2xl bg-gradient-to-br from-green-500/25 to-emerald-500/25 group-hover:from-green-500/40 group-hover:to-emerald-500/40 transition-all shadow-lg group-hover:shadow-green-500/30">
+                  <div className={`p-4 rounded-2xl transition-all shadow-lg group-hover:shadow-green-500/30 ${
+                    theme === 'light' 
+                      ? 'bg-gradient-to-br from-green-500/10 to-emerald-500/10 shadow-green-500/5 group-hover:from-green-500/15 group-hover:to-emerald-500/15' 
+                      : 'bg-gradient-to-br from-green-500/25 to-emerald-500/25 group-hover:from-green-500/40 group-hover:to-emerald-500/40'
+                  }`}>
                     <CheckCircle2 className="w-7 h-7 text-green-400 group-hover:scale-110 transition-transform" />
                   </div>
                   <div>
-                    <h3 className="text-white font-bold text-lg mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-400 group-hover:to-emerald-400 transition-all">Availability Status</h3>
-                    <p className="text-xs text-gray-400 font-medium">Current status</p>
+                    <h3 className={`font-bold text-lg mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-green-400 group-hover:to-emerald-400 transition-all ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>Availability Status</h3>
+                    <p className={`text-xs font-medium ${
+                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                    }`}>Current status</p>
                   </div>
                 </div>
               </div>
-              <div className="pt-4 border-t border-white/10">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/30 mb-4">
+              <div className={`pt-4 border-t ${
+                theme === 'dark' ? 'border-white/10' : 'border-gray-200'
+              }`}>
+                <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r border mb-4 ${
+                  theme === 'light' 
+                    ? 'from-green-50 to-emerald-50 border-green-300/50 shadow-sm' 
+                    : 'from-green-500/20 to-emerald-500/20 border-green-400/30'
+                }`}>
                   <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
                   <span className="text-green-400 font-semibold text-sm">Open to Opportunities</span>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-gray-300 group-hover:text-white transition-colors">
+                  <div className={`flex items-center gap-2 transition-colors ${
+                    theme === 'dark' ? 'text-gray-300 group-hover:text-white' : 'text-gray-700 group-hover:text-gray-900'
+                  }`}>
                     <div className="w-1.5 h-1.5 rounded-full bg-[#6366f1]"></div>
                     <span className="text-sm font-medium">Full-time positions</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-300 group-hover:text-white transition-colors">
+                  <div className={`flex items-center gap-2 transition-colors ${
+                    theme === 'dark' ? 'text-gray-300 group-hover:text-white' : 'text-gray-700 group-hover:text-gray-900'
+                  }`}>
                     <div className="w-1.5 h-1.5 rounded-full bg-[#6366f1]"></div>
                     <span className="text-sm font-medium">Freelance projects</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-300 group-hover:text-white transition-colors">
+                  <div className={`flex items-center gap-2 transition-colors ${
+                    theme === 'dark' ? 'text-gray-300 group-hover:text-white' : 'text-gray-700 group-hover:text-gray-900'
+                  }`}>
                     <div className="w-1.5 h-1.5 rounded-full bg-[#6366f1]"></div>
                     <span className="text-sm font-medium">Collaboration requests</span>
                   </div>
@@ -265,27 +343,45 @@ const ContactPage = () => {
             <div
               data-aos="fade-up"
               data-aos-delay="500"
-              className="bg-gradient-to-br from-[#6366f1]/10 via-[#8b5cf6]/10 to-[#a855f7]/10 backdrop-blur-xl rounded-3xl p-8 border border-[#6366f1]/30 hover:border-[#6366f1]/50 hover:shadow-2xl hover:shadow-[#6366f1]/20 transition-all duration-500 group transform hover:scale-[1.02] hover:-translate-y-1"
+              className={`backdrop-blur-xl rounded-3xl p-8 border transition-all duration-500 group transform hover:scale-[1.02] hover:-translate-y-1 ${
+                theme === 'dark'
+                  ? 'bg-gradient-to-br from-[#6366f1]/10 via-[#8b5cf6]/10 to-[#a855f7]/10 border-[#6366f1]/30 hover:border-[#6366f1]/50 hover:shadow-2xl hover:shadow-[#6366f1]/20'
+                  : 'bg-white border-[#6366f1]/20 hover:border-[#6366f1]/40 hover:shadow-lg hover:shadow-[#6366f1]/10 shadow-sm'
+              }`}
             >
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="p-4 rounded-2xl bg-gradient-to-br from-[#6366f1]/25 to-[#a855f7]/25 group-hover:from-[#6366f1]/40 group-hover:to-[#a855f7]/40 transition-all shadow-lg group-hover:shadow-[#6366f1]/30">
+                  <div className={`p-4 rounded-2xl transition-all shadow-lg group-hover:shadow-[#6366f1]/30 ${
+                    theme === 'light' 
+                      ? 'bg-gradient-to-br from-[#6366f1]/10 to-[#a855f7]/10 shadow-[#6366f1]/5 group-hover:from-[#6366f1]/15 group-hover:to-[#a855f7]/15' 
+                      : 'bg-gradient-to-br from-[#6366f1]/25 to-[#a855f7]/25 group-hover:from-[#6366f1]/40 group-hover:to-[#a855f7]/40'
+                  }`}>
                     <Clock className="w-7 h-7 text-[#6366f1] group-hover:scale-110 transition-transform" />
                   </div>
                   <div>
-                    <h3 className="text-white font-bold text-lg mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all">Response Time</h3>
-                    <p className="text-xs text-gray-400 font-medium">When to expect a reply</p>
+                    <h3 className={`font-bold text-lg mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#6366f1] group-hover:to-[#a855f7] transition-all ${
+                      theme === 'dark' ? 'text-white' : 'text-gray-900'
+                    }`}>Response Time</h3>
+                    <p className={`text-xs font-medium ${
+                      theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                    }`}>When to expect a reply</p>
                   </div>
                 </div>
               </div>
-              <div className="pt-4 border-t border-white/10">
-                <p className="text-gray-300 text-sm mb-3 font-medium">I typically respond within</p>
+              <div className={`pt-4 border-t ${
+                theme === 'dark' ? 'border-white/10' : 'border-gray-200'
+              }`}>
+                <p className={`text-sm mb-3 font-medium ${
+                  theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                }`}>I typically respond within</p>
                 <div className="mb-4">
                   <p className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] mb-2">
                     24-48 hours
                   </p>
                 </div>
-                <div className="flex items-center gap-2 text-gray-400 text-xs font-medium">
+                <div className={`flex items-center gap-2 text-xs font-medium ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                }`}>
                   <Clock className="w-3 h-3 text-[#6366f1]" />
                   <span>Mon-Fri: Business hours (IST)</span>
                 </div>
@@ -297,14 +393,18 @@ const ContactPage = () => {
           <div
             data-aos="fade-up"
             data-aos-duration="1200"
-            className="bg-white/5 backdrop-blur-xl rounded-3xl shadow-2xl p-5 py-10 sm:p-10 transform transition-all duration-300 hover:shadow-[#6366f1]/10"
+            className={`backdrop-blur-xl rounded-3xl p-5 py-10 sm:p-10 transform transition-all duration-300 border ${
+              theme === 'dark'
+                ? 'bg-white/5 shadow-2xl hover:shadow-[#6366f1]/10 border-white/10'
+                : 'bg-white shadow-md hover:shadow-lg hover:shadow-[#6366f1]/10 border-gray-200'
+            }`}
           >
             <div className="flex justify-between items-start mb-8">
               <div>
                 <h2 className="text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7]">
                   Get in Touch
                 </h2>
-                <p className="text-gray-400">
+                <p className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}>
                   Have something to discuss? Send me a message and let's talk.
                 </p>
               </div>
@@ -328,7 +428,9 @@ const ContactPage = () => {
                 data-aos-delay="100"
                 className="relative group"
               >
-                <User className="absolute left-4 top-4 w-5 h-5 text-gray-400 group-focus-within:text-[#6366f1] transition-colors" />
+                <User className={`absolute left-4 top-4 w-5 h-5 transition-colors group-focus-within:text-[#6366f1] ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                }`} />
                 <input
                   type="text"
                   name="name"
@@ -336,7 +438,11 @@ const ContactPage = () => {
                   value={formData.name}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="w-full p-4 pl-12 bg-white/10 rounded-xl border border-white/20 placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-[#6366f1]/30 transition-all duration-300 hover:border-[#6366f1]/30 disabled:opacity-50"
+                  className={`w-full p-4 pl-12 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#6366f1]/30 transition-all duration-300 hover:border-[#6366f1]/30 disabled:opacity-50 ${
+                    theme === 'dark'
+                      ? 'bg-white/10 border-white/20 placeholder-gray-500 text-white'
+                      : 'bg-gray-50 border-gray-300 placeholder-gray-400 text-gray-900 focus:bg-white focus:border-[#6366f1]/50'
+                  }`}
                   required
                 />
               </div>
@@ -345,7 +451,9 @@ const ContactPage = () => {
                 data-aos-delay="200"
                 className="relative group"
               >
-                <Mail className="absolute left-4 top-4 w-5 h-5 text-gray-400 group-focus-within:text-[#6366f1] transition-colors" />
+                <Mail className={`absolute left-4 top-4 w-5 h-5 transition-colors group-focus-within:text-[#6366f1] ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                }`} />
                 <input
                   type="email"
                   name="email"
@@ -353,7 +461,11 @@ const ContactPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="w-full p-4 pl-12 bg-white/10 rounded-xl border border-white/20 placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-[#6366f1]/30 transition-all duration-300 hover:border-[#6366f1]/30 disabled:opacity-50"
+                  className={`w-full p-4 pl-12 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#6366f1]/30 transition-all duration-300 hover:border-[#6366f1]/30 disabled:opacity-50 ${
+                    theme === 'dark'
+                      ? 'bg-white/10 border-white/20 placeholder-gray-500 text-white'
+                      : 'bg-gray-50 border-gray-300 placeholder-gray-400 text-gray-900 focus:bg-white focus:border-[#6366f1]/50'
+                  }`}
                   required
                 />
               </div>
@@ -362,14 +474,20 @@ const ContactPage = () => {
                 data-aos-delay="300"
                 className="relative group"
               >
-                <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-gray-400 group-focus-within:text-[#6366f1] transition-colors" />
+                <MessageSquare className={`absolute left-4 top-4 w-5 h-5 transition-colors group-focus-within:text-[#6366f1] ${
+                  theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+                }`} />
                 <textarea
                   name="message"
                   placeholder="Your Message"
                   value={formData.message}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className="w-full resize-none p-4 pl-12 bg-white/10 rounded-xl border border-white/20 placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-[#6366f1]/30 transition-all duration-300 hover:border-[#6366f1]/30 h-[9.9rem] disabled:opacity-50"
+                  className={`w-full resize-none p-4 pl-12 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#6366f1]/30 transition-all duration-300 hover:border-[#6366f1]/30 h-[9.9rem] disabled:opacity-50 ${
+                    theme === 'dark'
+                      ? 'bg-white/10 border-white/20 placeholder-gray-500 text-white'
+                      : 'bg-gray-50 border-gray-300 placeholder-gray-400 text-gray-900 focus:bg-white'
+                  }`}
                   required
                 />
               </div>
@@ -385,7 +503,9 @@ const ContactPage = () => {
               </button>
             </form>
 
-            <div className="mt-10 pt-6 border-t border-white/10 flex justify-center space-x-6">
+            <div className={`mt-10 pt-6 border-t flex justify-center space-x-6 ${
+              theme === 'dark' ? 'border-white/10' : 'border-gray-200'
+            }`}>
               <SocialLinks />
             </div>
           </div>
@@ -394,9 +514,15 @@ const ContactPage = () => {
           <div
             data-aos="fade-up"
             data-aos-delay="600"
-            className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10"
+            className={`backdrop-blur-xl rounded-2xl p-6 border ${
+              theme === 'dark'
+                ? 'bg-white/5 border-white/10'
+                : 'bg-white border-gray-200 shadow-sm'
+            }`}
           >
-            <h3 className="text-white font-semibold mb-4 text-center">Quick Actions</h3>
+            <h3 className={`font-semibold mb-4 text-center ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>Quick Actions</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <a
                 href="#"
@@ -409,17 +535,25 @@ const ContactPage = () => {
                     confirmButtonColor: '#6366f1'
                   });
                 }}
-                className="flex items-center justify-center gap-3 p-4 rounded-xl bg-gradient-to-r from-[#6366f1]/20 to-[#a855f7]/20 border border-[#6366f1]/30 hover:from-[#6366f1]/30 hover:to-[#a855f7]/30 transition-all group"
+                className={`flex items-center justify-center gap-3 p-4 rounded-xl bg-gradient-to-r from-[#6366f1]/20 to-[#a855f7]/20 border border-[#6366f1]/30 hover:from-[#6366f1]/30 hover:to-[#a855f7]/30 transition-all group ${
+                  theme === 'light' ? 'shadow-sm hover:shadow-md' : ''
+                }`}
               >
                 <Download className="w-5 h-5 text-[#6366f1] group-hover:scale-110 transition-transform" />
-                <span className="text-white font-medium">Download Resume</span>
+                <span className={`font-medium ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>Download Resume</span>
               </a>
               <a
                 href="mailto:monuprajapat6270@gmail.com?subject=Let's Schedule a Call"
-                className="flex items-center justify-center gap-3 p-4 rounded-xl bg-gradient-to-r from-[#6366f1]/20 to-[#a855f7]/20 border border-[#6366f1]/30 hover:from-[#6366f1]/30 hover:to-[#a855f7]/30 transition-all group"
+                className={`flex items-center justify-center gap-3 p-4 rounded-xl bg-gradient-to-r from-[#6366f1]/20 to-[#a855f7]/20 border border-[#6366f1]/30 hover:from-[#6366f1]/30 hover:to-[#a855f7]/30 transition-all group ${
+                  theme === 'light' ? 'shadow-sm hover:shadow-md' : ''
+                }`}
               >
                 <Calendar className="w-5 h-5 text-[#6366f1] group-hover:scale-110 transition-transform" />
-                <span className="text-white font-medium">Schedule a Call</span>
+                <span className={`font-medium ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>Schedule a Call</span>
               </a>
             </div>
           </div>

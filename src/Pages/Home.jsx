@@ -10,47 +10,71 @@ import {
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useTheme } from "../context/ThemeContext";
 
 // Memoized Components
-const StatusBadge = memo(() => (
-  <div
-    className="inline-block animate-float lg:mx-0"
-    data-aos="zoom-in"
-    data-aos-delay="400"
-  >
-    <div className="relative group">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] rounded-full blur opacity-30 group-hover:opacity-60 transition duration-1000"></div>
-      <div className="relative px-3 sm:px-4 py-2 rounded-full bg-gradient-to-r from-black/50 to-black/40 backdrop-blur-xl border border-white/10 group-hover:border-[#6366f1]/30 transition-all duration-300">
-        <span className="bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] text-transparent bg-clip-text sm:text-sm text-[0.7rem] font-semibold flex items-center">
-          <Sparkles className="sm:w-4 sm:h-4 w-3 h-3 mr-2 text-[#6366f1] animate-pulse" />
-          3+ Years Experience
-        </span>
+const StatusBadge = memo(() => {
+  const { theme } = useTheme();
+  return (
+    <div
+      className="inline-block animate-float lg:mx-0"
+      data-aos="zoom-in"
+      data-aos-delay="400"
+    >
+      <div className="relative group">
+        <div className={`absolute -inset-0.5 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] rounded-full blur transition duration-1000 ${
+          theme === 'dark' ? 'opacity-30 group-hover:opacity-60' : 'opacity-20 group-hover:opacity-40'
+        }`}></div>
+        <div className={`relative px-3 sm:px-4 py-2 rounded-full backdrop-blur-xl transition-all duration-300 ${
+          theme === 'dark' 
+            ? 'bg-gradient-to-r from-black/50 to-black/40 border border-white/10 group-hover:border-[#6366f1]/30'
+            : 'bg-white/90 border border-gray-200 group-hover:border-[#6366f1]/50 shadow-sm group-hover:shadow-md'
+        }`}>
+          <span className="bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] text-transparent bg-clip-text sm:text-sm text-[0.7rem] font-semibold flex items-center">
+            <Sparkles className={`sm:w-4 sm:h-4 w-3 h-3 mr-2 animate-pulse ${
+              theme === 'dark' ? 'text-[#6366f1]' : 'text-[#6366f1]'
+            }`} />
+            3+ Years Experience
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-));
+  );
+});
 
-const MainTitle = memo(() => (
-  <div className="space-y-2" data-aos="fade-up" data-aos-delay="600">
-    <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl font-bold tracking-tight">
-      <span className="relative inline-block group">
-        <span className="absolute -inset-2 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></span>
-        <span className="relative bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent drop-shadow-lg">
-          Full Stack
+const MainTitle = memo(() => {
+  const { theme } = useTheme();
+  return (
+    <div className="space-y-2" data-aos="fade-up" data-aos-delay="600">
+      <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-6xl xl:text-7xl font-bold tracking-tight">
+        <span className="relative inline-block group">
+          <span className={`absolute -inset-2 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] blur-2xl transition-opacity duration-500 ${
+            theme === 'dark' ? 'opacity-20 group-hover:opacity-30' : 'opacity-10 group-hover:opacity-15'
+          }`}></span>
+          <span className={`relative bg-clip-text text-transparent drop-shadow-lg ${
+            theme === 'dark' 
+              ? 'bg-gradient-to-r from-white via-blue-100 to-purple-200'
+              : 'bg-gradient-to-r from-gray-900 via-indigo-900 to-gray-900'
+          }`}>
+            Full Stack
+          </span>
         </span>
-      </span>
-      <br />
-      <span className="relative inline-block mt-2 group">
-        <span className="absolute -inset-2 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-500"></span>
-        <span className="relative bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] bg-clip-text text-transparent drop-shadow-lg">
-          Developer
+        <br />
+        <span className="relative inline-block mt-2 group">
+          <span className={`absolute -inset-2 bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] blur-2xl transition-opacity duration-500 ${
+            theme === 'dark' ? 'opacity-20 group-hover:opacity-30' : 'opacity-10 group-hover:opacity-15'
+          }`}></span>
+          <span className="relative bg-gradient-to-r from-[#6366f1] via-[#8b5cf6] to-[#a855f7] bg-clip-text text-transparent drop-shadow-lg">
+            Developer
+          </span>
         </span>
-      </span>
-    </h1>
-  </div>
-));
+      </h1>
+    </div>
+  );
+});
 
 const TechStack = memo(({ tech, index }) => {
+  const { theme } = useTheme();
   const colorSchemes = [
     { 
       bgFrom: "#6366f1", bgTo: "#8b5cf6", 
@@ -93,21 +117,25 @@ const TechStack = memo(({ tech, index }) => {
   
   return (
     <div 
-      className="px-4 py-2 hidden sm:block rounded-xl backdrop-blur-sm border text-sm text-gray-300 hover:scale-105 hover:shadow-lg transition-all duration-300 group cursor-pointer relative overflow-hidden"
+      className={`px-4 py-2 hidden sm:block rounded-xl backdrop-blur-sm border text-sm hover:scale-105 hover:shadow-lg transition-all duration-300 group cursor-pointer relative overflow-hidden ${
+        theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+      }`}
       style={{
-        background: `linear-gradient(to right, ${scheme.bgFrom}33, ${scheme.bgTo}33)`,
-        borderColor: `${scheme.border}66`,
-        boxShadow: `0 4px 14px 0 ${scheme.border}33`
+        background: `linear-gradient(to right, ${scheme.bgFrom}${theme === 'dark' ? '33' : '15'}, ${scheme.bgTo}${theme === 'dark' ? '33' : '15'})`,
+        borderColor: `${scheme.border}${theme === 'dark' ? '66' : '40'}`,
+        boxShadow: `0 4px 14px 0 ${scheme.border}${theme === 'dark' ? '33' : '20'}`
       }}
     >
       <div 
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{
-          background: `linear-gradient(to right, ${scheme.bgFrom}33, ${scheme.bgTo}33)`
+          background: `linear-gradient(to right, ${scheme.bgFrom}${theme === 'dark' ? '33' : '15'}, ${scheme.bgTo}${theme === 'dark' ? '33' : '15'})`
         }}
       ></div>
       <span 
-        className="relative font-medium text-gray-300 group-hover:text-transparent transition-all duration-300"
+        className={`relative font-medium group-hover:text-transparent transition-all duration-300 ${
+          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+        }`}
         style={{
           backgroundImage: `linear-gradient(to right, ${scheme.textFrom}, ${scheme.textTo})`,
           WebkitBackgroundClip: 'text',
@@ -120,39 +148,63 @@ const TechStack = memo(({ tech, index }) => {
   );
 });
 
-const CTAButton = memo(({ href, text, icon: Icon }) => (
-  <a href={href}>
-    <button className="group relative w-[160px]">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-[#4f52c9] to-[#8644c5] rounded-xl opacity-50 blur-md group-hover:opacity-90 transition-all duration-700"></div>
-      <div className="relative h-11 bg-[#030014] backdrop-blur-xl rounded-lg border border-white/10 leading-none overflow-hidden">
-        <div className="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-gradient-to-r from-[#4f52c9]/20 to-[#8644c5]/20"></div>
-        <span className="absolute inset-0 flex items-center justify-center gap-2 text-sm group-hover:gap-3 transition-all duration-300">
-          <span className="bg-gradient-to-r from-gray-200 to-white bg-clip-text text-transparent font-medium z-10">
-            {text}
+const CTAButton = memo(({ href, text, icon: Icon }) => {
+  const { theme } = useTheme();
+  return (
+    <a href={href}>
+      <button className="group relative w-[160px]">
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-[#4f52c9] to-[#8644c5] rounded-xl opacity-50 blur-md group-hover:opacity-90 transition-all duration-700"></div>
+        <div className={`relative h-11 backdrop-blur-xl rounded-lg border leading-none overflow-hidden ${
+          theme === 'dark' 
+            ? 'bg-[#030014] border-white/10' 
+            : 'bg-white/90 border-gray-200'
+        }`}>
+          <div className="absolute inset-0 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 bg-gradient-to-r from-[#4f52c9]/20 to-[#8644c5]/20"></div>
+          <span className="absolute inset-0 flex items-center justify-center gap-2 text-sm group-hover:gap-3 transition-all duration-300">
+            <span className={`font-medium z-10 ${
+              theme === 'dark' 
+                ? 'bg-gradient-to-r from-gray-200 to-white bg-clip-text text-transparent'
+                : 'bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-transparent'
+            }`}>
+              {text}
+            </span>
+            <Icon
+              className={`w-4 h-4 ${
+                theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
+              } ${
+                text === "Contact"
+                  ? "group-hover:translate-x-1"
+                  : "group-hover:rotate-45"
+              } transform transition-all duration-300 z-10`}
+            />
           </span>
-          <Icon
-            className={`w-4 h-4 text-gray-200 ${
-              text === "Contact"
-                ? "group-hover:translate-x-1"
-                : "group-hover:rotate-45"
-            } transform transition-all duration-300 z-10`}
-          />
-        </span>
-      </div>
-    </button>
-  </a>
-));
+        </div>
+      </button>
+    </a>
+  );
+});
 
-const SocialLink = memo(({ icon: Icon, link }) => (
-  <a href={link} target="_blank" rel="noopener noreferrer">
-    <button className="group relative p-3">
-      <div className="absolute inset-0 bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
-      <div className="relative rounded-xl bg-black/50 backdrop-blur-xl p-2 flex items-center justify-center border border-white/10 group-hover:border-white/20 transition-all duration-300">
-        <Icon className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
-      </div>
-    </button>
-  </a>
-));
+const SocialLink = memo(({ icon: Icon, link }) => {
+  const { theme } = useTheme();
+  return (
+    <a href={link} target="_blank" rel="noopener noreferrer">
+      <button className="group relative p-3">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+        <div className={`relative rounded-xl backdrop-blur-xl p-2 flex items-center justify-center border transition-all duration-300 ${
+          theme === 'dark'
+            ? 'bg-black/50 border-white/10 group-hover:border-white/20'
+            : 'bg-white/80 border-gray-200 group-hover:border-gray-300'
+        }`}>
+          <Icon className={`w-5 h-5 transition-colors ${
+            theme === 'dark' 
+              ? 'text-gray-400 group-hover:text-white'
+              : 'text-gray-600 group-hover:text-gray-900'
+          }`} />
+        </div>
+      </button>
+    </a>
+  );
+});
 
 // Constants
 const TYPING_SPEED = 100;
@@ -167,6 +219,7 @@ const SOCIAL_LINKS = [
 ];
 
 const Home = () => {
+  const { theme } = useTheme();
   const [text, setText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const [wordIndex, setWordIndex] = useState(0);
@@ -193,33 +246,54 @@ const Home = () => {
     return () => setIsLoaded(false);
   }, []);
 
-  // Optimize typing effect
-  const handleTyping = useCallback(() => {
-    if (isTyping) {
-      if (charIndex < WORDS[wordIndex].length) {
-        setText((prev) => prev + WORDS[wordIndex][charIndex]);
-        setCharIndex((prev) => prev + 1);
-      } else {
-        setTimeout(() => setIsTyping(false), PAUSE_DURATION);
-      }
-    } else {
-      if (charIndex > 0) {
-        setText((prev) => prev.slice(0, -1));
-        setCharIndex((prev) => prev - 1);
-      } else {
-        setWordIndex((prev) => (prev + 1) % WORDS.length);
-        setIsTyping(true);
-      }
-    }
-  }, [charIndex, isTyping, wordIndex]);
-
+  // Initialize typing effect on mount
   useEffect(() => {
-    const timeout = setTimeout(
-      handleTyping,
-      isTyping ? TYPING_SPEED : ERASING_SPEED
-    );
-    return () => clearTimeout(timeout);
-  }, [handleTyping]);
+    // Reset typing effect when component mounts
+    setText("");
+    setCharIndex(0);
+    setWordIndex(0);
+    setIsTyping(true);
+  }, []);
+
+  // Typing effect - refactored to be more reliable
+  useEffect(() => {
+    let timeoutId;
+    let pauseTimeoutId;
+
+    const typeText = () => {
+      if (isTyping) {
+        if (charIndex < WORDS[wordIndex].length) {
+          setText((prev) => prev + WORDS[wordIndex][charIndex]);
+          setCharIndex((prev) => prev + 1);
+          timeoutId = setTimeout(typeText, TYPING_SPEED);
+        } else {
+          // Pause before erasing
+          pauseTimeoutId = setTimeout(() => {
+            setIsTyping(false);
+          }, PAUSE_DURATION);
+        }
+      } else {
+        if (charIndex > 0) {
+          setText((prev) => prev.slice(0, -1));
+          setCharIndex((prev) => prev - 1);
+          timeoutId = setTimeout(typeText, ERASING_SPEED);
+        } else {
+          // Move to next word
+          setWordIndex((prev) => (prev + 1) % WORDS.length);
+          setIsTyping(true);
+          timeoutId = setTimeout(typeText, TYPING_SPEED);
+        }
+      }
+    };
+
+    // Start typing effect
+    timeoutId = setTimeout(typeText, TYPING_SPEED);
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      if (pauseTimeoutId) clearTimeout(pauseTimeoutId);
+    };
+  }, [isTyping, charIndex, wordIndex]);
 
   // Lottie configuration
   const lottieOptions = {
@@ -239,7 +313,9 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#030014] overflow-hidden" id="Home">
+    <div className={`min-h-screen overflow-hidden ${
+      theme === 'dark' ? 'bg-[#030014]' : 'bg-white'
+    }`} id="Home">
       <div
         className={`relative z-10 transition-all duration-1000 ${
           isLoaded ? "opacity-100" : "opacity-0"
@@ -271,12 +347,16 @@ const Home = () => {
                     ) : text.includes("AWS") ? (
                       <span className="inline-block">
                         <span className="bg-gradient-to-r from-[#f97316] via-[#fb923c] to-[#fdba74] bg-clip-text text-transparent font-semibold">AWS</span>
-                        <span className="text-gray-300"> & </span>
+                        <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}> & </span>
                         <span className="bg-gradient-to-r from-[#8b5cf6] via-[#a855f7] to-[#ec4899] bg-clip-text text-transparent font-semibold">Web3</span>
-                        {text.includes("Enthusiast") && <span className="text-gray-300"> Enthusiast</span>}
+                        {text.includes("Enthusiast") && <span className={theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}> Enthusiast</span>}
                       </span>
                     ) : (
-                      <span className="bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 bg-clip-text text-transparent">
+                      <span className={`bg-clip-text text-transparent ${
+                        theme === 'dark' 
+                          ? 'bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400'
+                          : 'bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900'
+                      }`}>
                         {text}
                       </span>
                     )}
@@ -286,9 +366,9 @@ const Home = () => {
 
                 {/* Description */}
                 <p
-                  className="text-base md:text-lg text-gray-400 max-w-xl leading-relaxed font-light"
-                  data-aos="fade-up"
-                  data-aos-delay="1000"
+                  className={`text-base md:text-lg max-w-xl leading-relaxed font-light ${
+                    theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+                  }`}
                 >
                   Full Stack Developer with expertise in building scalable web applications across the{" "}
                   <span className="text-[#6366f1] font-medium">MERN stack</span>,{" "}
